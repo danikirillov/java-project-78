@@ -10,9 +10,9 @@ public class StringSchema {
         return this;
     }
 
-    public StringSchema minLength(int minLength) {
+    public StringSchema minLength(int length) {
         isRequired = true;
-        this.minLength = minLength;
+        this.minLength = length;
         return this;
     }
 
