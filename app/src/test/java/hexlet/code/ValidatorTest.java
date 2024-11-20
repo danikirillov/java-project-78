@@ -66,9 +66,9 @@ class ValidatorTest {
             .minLength(10)
             .minLength(3)
             .contains("qwer");
-        
+
         var expectedIsValid = schema.isValid("}-|-{qwerty}-|-{");
-        
+
         assertTrue(expectedIsValid);
     }
 
