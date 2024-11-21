@@ -132,8 +132,18 @@ class ValidatorTest {
         assertFalse(schema.isValid(3));
         assertFalse(schema.isValid(4));
         assertFalse(schema.isValid(5));
-        assertTrue(schema.isValid(10));
+        assertFalse(schema.isValid(10));
         assertFalse(schema.isValid(-10));
+    }
+
+    @Test
+    void testNumberSchemaCornerCase() {
+        var validator = new Validator();
+        var schema = validator.number().positive();
+
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.isValid(1));
+        assertFalse(schema.isValid(-1));
     }
 
     @Test

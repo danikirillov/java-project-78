@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-public class StringSchema extends BaseSchema<String> {
+public final class StringSchema extends BaseSchema<String> {
     public StringSchema required() {
         requiredRule = text -> text != null && !text.isBlank();
         return this;
