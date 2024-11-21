@@ -72,4 +72,63 @@ class ValidatorTest {
         assertTrue(expectedIsValid);
     }
 
+    @Test
+    void testCornerCasesStringSchema() {
+        var validator = new Validator();
+        var containsEmptySchema = validator.string().contains("");
+
+        assertTrue(containsEmptySchema.isValid(""));
+//        todo: determine this
+        assertFalse(containsEmptySchema.isValid(null));
+
+        var negativeMinLengthSchema = validator.string().minLength(-1);
+
+        assertTrue(negativeMinLengthSchema.isValid(""));
+//        todo: determine this
+        assertFalse(negativeMinLengthSchema.isValid(null));
+
+    }
+
+    @Test
+    void testNumberSchema() {
+        var validator = new Validator();
+        var schema = validator.number();
+
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.isValid(1));
+        assertTrue(schema.isValid(-1));
+
+        schema.required();
+
+        assertFalse(schema.isValid(null));
+        assertTrue(schema.isValid(1));
+        assertTrue(schema.isValid(-1));
+
+        schema.positive();
+
+        assertFalse(schema.isValid(null));
+        assertTrue(schema.isValid(1));
+        assertFalse(schema.isValid(-1));
+        assertFalse(schema.isValid(0));
+
+        schema.range(2, 4);
+
+        assertFalse(schema.isValid(null));
+        assertFalse(schema.isValid(-1));
+        assertTrue(schema.isValid(2));
+        assertTrue(schema.isValid(3));
+        assertTrue(schema.isValid(4));
+        assertFalse(schema.isValid(5));
+
+        schema.range(10, -10);
+
+        assertFalse(schema.isValid(null));
+        assertFalse(schema.isValid(-1));
+        assertFalse(schema.isValid(2));
+        assertFalse(schema.isValid(3));
+        assertFalse(schema.isValid(4));
+        assertFalse(schema.isValid(5));
+        assertFalse(schema.isValid(10));
+        assertFalse(schema.isValid(-10));
+    }
 }
