@@ -14,7 +14,13 @@ public class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema range(Integer from, Integer to) {
-        ruleIdToRule.put("range", number -> from <= number && number <= to);
+        ruleIdToRule.put(
+            "range",
+            number -> from < number && number < to
+                || Objects.equals(from, number)
+                || Objects.equals(to, number
+            )
+        );
         return this;
     }
 }

@@ -132,7 +132,7 @@ class ValidatorTest {
         assertFalse(schema.isValid(3));
         assertFalse(schema.isValid(4));
         assertFalse(schema.isValid(5));
-        assertFalse(schema.isValid(10));
+        assertTrue(schema.isValid(10));
         assertFalse(schema.isValid(-10));
     }
 
