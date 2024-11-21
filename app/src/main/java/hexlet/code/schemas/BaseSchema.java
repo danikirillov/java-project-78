@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public class BaseSchema<T> {
+public sealed class BaseSchema<T> permits MapSchema, NumberSchema, StringSchema {
     protected final Map<String, Predicate<T>> ruleIdToRule = new HashMap<>();
     protected Predicate<T> requiredRule = data -> ruleIdToRule.isEmpty() || data != null;
 
